@@ -1,0 +1,33 @@
+﻿@using PizzaPlace.Shared.Model
+@code {
+private State State { get; } = new State()
+{
+Menu = new Menu
+{
+    Pizzas = new List<Pizza> {
+                new Pizza(1, "Pepperoni", 8.99M, Spiciness.Spicy ), new Pizza(2, "Margarita", 7.99M, Spiciness.None ), new Pizza(3, "Diabolo", 9.99M, Spiciness.Hot )
+            }
+}
+};
+}
+
+<h1>Our selection of pizzas</h1>
+@foreach (var pizza in State.Menu.Pizzas)
+{
+    <div class="row">
+        <div class="col">
+            @pizza.Name
+        </div>
+        <div class="col">
+            @pizza.Price
+        </div> 
+        <div class="col">
+            <img src="@SpicinessImage(pizza.Spiciness)" alt="@pizza.Spiciness" />
+        </div> 
+        <div class="col">
+            <button class="btn btn-success" @onclick="@(() => AddToBasket(pizza))">
+                Add
+            </button>
+        </div>
+    </div>
+}
